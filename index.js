@@ -28,7 +28,7 @@ app.post("/send", (req,res)=>{
     if(req.files.img !=null && req.files.img != undefined){
         req.files.img.mv('./imgs/'+req.files.img.name.replaceAll(" ",''))
     }
-    res.status(202).send('data saved');
+    res.status(202).send('data has been saved successfully for output visit this link : https://detroja-jenish.github.io/TA/forms/output.html');
 })
 
 app.get("/get", (req,res)=>{
