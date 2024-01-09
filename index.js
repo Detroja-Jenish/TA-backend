@@ -23,9 +23,9 @@ app.post("/send", (req,res)=>{
         address: (req.body.address !=null && req.body.address != undefined) ? req.body.address : "",
         gender: (req.body.gender !=null && req.body.gender != undefined) ? req.body.gender : "",
         city: (req.body.city !=null && req.body.city != undefined) ? req.body.city : "",
-        img:(req.body.img !=null && req.file.img != undefined) ?  'http://127.0.0.1:3000/'+req.files.img.name.replaceAll(' ','') : ""
+        img:(req.files.img !=null && req.files.img != undefined) ?  'http://127.0.0.1:3000/'+req.files.img.name.replaceAll(' ','') : ""
     })
-    if(req.body.img !=null && req.file.img != undefined){
+    if(req.files.img !=null && req.files.img != undefined){
         req.files.img.mv('./imgs/'+req.files.img.name.replaceAll(" ",''))
     }
     res.send(req.body);
