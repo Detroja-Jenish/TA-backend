@@ -16,16 +16,16 @@ app.use(fileUpload())
 app.post("/send", (req,res)=>{
     
     data.push({fullName: req.body.fullName,
-        enroll: (enroll in req.body) ? req.body.enroll : "",
-        sem: (sem in req.body) ? req.body.sem : "",
-        email: (email in req.body) ? req.body.email : "",
-        favSports: (favSports in req.body) ? req.body.favSports : "",
-        address: (address in req.body) ? req.body.address : "",
-        gender: (gender in req.body) ? req.body.gender : "",
-        city: (city in req.body) ? req.body.city : "",
-        img:(img in req.files) ?  'http://127.0.0.1:3000/'+req.files.img.name.replaceAll(' ','') : ""
+        enroll: (req.body.enroll !=null && req.body.enroll != undefined ) ? req.body.enroll : "",
+        sem: (req.body.sem !=null && req.body.sem != undefined) ? req.body.sem : "",
+        email: (req.body.email !=null && req.body.email != undefined) ? req.body.email : "",
+        favSports: (req.body.favSports !=null && req.body.favSports != undefined) ? req.body.favSports : "",
+        address: (req.body.address !=null && req.body.address != undefined) ? req.body.address : "",
+        gender: (req.body.gender !=null && req.body.gender != undefined) ? req.body.gender : "",
+        city: (req.body.city !=null && req.body.city != undefined) ? req.body.city : "",
+        img:(req.body.img !=null && req.file.imgs != undefined) ?  'http://127.0.0.1:3000/'+req.files.img.name.replaceAll(' ','') : ""
     })
-    if(img in req.files){
+    if(req.body.img !=null && req.file.imgs != undefined){
         req.files.img.mv('./imgs/'+req.files.img.name.replaceAll(" ",''))
     }
     res.send(req.body);
@@ -53,3 +53,5 @@ app.get("/clearAll" , (req,res)=>{
 app.listen(3000, ()=>{
     console.log("ashdjnad")
 })
+
+//https://api.render.com/deploy/srv-cmejutn109ks73c77qdg?key=WLN_F55T4Vw
