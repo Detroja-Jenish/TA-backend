@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="content"></div>
+    <script>
+        table([])
+        function table(data){
+            console.log("sdnfj")
+            jsx = "<table border='1' width='1500'>"
+            jsx += `<tr>
+                <th> name </th>
+                <th> sem </th>
+                <th> gender </th>
+                <th>enroll</th>
+                <th>email</th>
+                <th>fav Sports</th>
+                <th>address</th>
+                <th>city</th>
+                <th>img</th>
+                `
+            
+            for (row of data){
+                const {fullName, enroll, sem, email, favSports, address, gender, city, img} = row;
+                sports = '';
+                for(sport of favSports){
+                    sports += `<li>${sport}</li>`
+                }
+               jsx += `<tr align='center'> 
+                <td> ${fullName} </td>
+                <td> ${sem}</td>
+                <td> ${gender} </td>
+                <td> ${enroll} </td>
+                <td> ${email} </td>
+                <td> <ul>${sports}</ul> </td>
+                <td width='300px'> ${address} </td>
+                <td> ${city} </td>
+                <td> <img src='${img}'  height='100'></td>
+                </tr>`
+            }
+            jsx+='</table>'
+            document.getElementById("content").innerHTML = jsx
+
+        }
+
+        fetch('http://127.0.0.1:3000/get').then(res=>res.json()).then((res)=>{console.log(res); table(res)}).error(e=>{console.log(e)});
+    </script>
+</body>
+
+</html>
