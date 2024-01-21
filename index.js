@@ -12,7 +12,8 @@ app.use(bodyParser.json({ extended: true }));
 app.use(cors())
 // app.use('/',express.static('imgs'))
 app.use(express.static(path.join(__dirname, 'imgs'))) 
-app.use(fileUpload())
+app.use(fileUpload());
+app.use("/css", express.static(path.join(__dirname,'CSS_PRATICSE')))
 app.post("/send", (req,res)=>{
     
     data.push({fullName: req.body.fullName,
@@ -23,12 +24,13 @@ app.post("/send", (req,res)=>{
         address: (req.body.address !=null && req.body.address != undefined) ? req.body.address : "",
         gender: (req.body.gender !=null && req.body.gender != undefined) ? req.body.gender : "",
         city: (req.body.city !=null && req.body.city != undefined) ? req.body.city : "",
-        img:(req.files.img !=null && req.files.img != undefined) ?  'https://ta-demo.onrender.com/'+req.files.img.name.replaceAll(' ','') : ""
+        img:(req.files.img !=null && req.files.img != undefined) ?  'http://127.0.0.1:3000/'+req.files.img.name.replaceAll(' ','') : ""
     })
+    console.log(req.files.img)
     if(req.files.img !=null && req.files.img != undefined){
         req.files.img.mv('./imgs/'+req.files.img.name.replaceAll(" ",''))
     }
-    res.status(202).send('data has been saved successfully for output visit this link : https://detroja-jenish.github.io/TA/forms/output.html');
+    res.send(req.body);
 })
 
 app.get("/get", (req,res)=>{
@@ -50,7 +52,13 @@ app.get("/clearAll" , (req,res)=>{
     res.send("all cleared")
 })
 
+app.post("/add-praticse", (req,res)=>{
+    req.files.file.mv("./CSS_PRATICSE/"+req.files.file.name);
+    res.send("file saved");
+})
+
 app.listen(3000, ()=>{
     console.log("ashdjnad")
 })
 
+//https://api.render.com/deploy/srv-cmejutn109ks73c77qdg?key=WLN_F55T4Vw
